@@ -1,6 +1,44 @@
 from tkinter import ttk as ttk
 from tkinter import *
+import sqlite3
 
+
+def database_init():
+    conn = sqlite3.connect('store.db')
+    c = conn.cursor()
+
+    c.execute("""CREATE TABLE IF NOT EXISTS user (
+                  full_name VARCHAR(40),
+                  contact CHAR(10),
+                  email VARCHAR(30),
+                  address VARCHAR(30),
+                  user_id INTEGER PRIMARY KEY AUTOINCREMENT)
+                   """)
+    c.execute("""CREATE TABLE IF NOT EXISTS managers(
+                full_name VARCHAR(40),
+                contact CHAR(10),
+                email VARCHAR(30),
+                address VARCHAR(30),
+                manager_id INTEGER PRIMARY KEY AUTOINCREMENT)
+                 """)
+
+    c.execute("""CREATE TABLE IF NOT EXISTS products(
+                    product_id varchar(100),
+                    product_description TEXT,
+                    product_price INTEGER check(product_price>=0),
+                    quantity INTEGER check(quantity>=0))""")
+
+    c.execute("""CREATE TABLE IF NOT EXISTS comments(
+                name VARCHAR(40),
+                email VARCHAR(30),
+                contact VARCHAR(10),
+                comment TEXT, 
+                comment_id INTEGER PRIMARY KEY AUTOINCREMENT)
+                """)
+
+
+    conn.commit()
+    conn.close()
 
 
 
@@ -70,6 +108,7 @@ def app_initializer():
 
 
     root.mainloop()
+
 
 
 
