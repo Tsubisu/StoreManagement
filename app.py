@@ -40,10 +40,10 @@ def database_init():
     conn.commit()
     conn.close()
 
-root=None
+
 
 def app_initializer():
-    global root
+
     root = Tk()
     root.geometry('1200x675')
     root.title('Music Store')
