@@ -1,6 +1,6 @@
 from tkinter import ttk as ttk
 from Animation import *
-
+from LoginWindow import login
 
 
 
@@ -22,7 +22,8 @@ def home_bar_builder(frame):
     Search = ttk.Button(HomeBar, text="Search", padding='0.1,0.1', takefocus=False, width=6,command=lambda:vertical_animation(Pages.top_pages["Search"],0,-120,0,2))
     Search.place(x=1010, y=80)
 
-    LogInBtn = ttk.Button(HomeBar, text="LogIn", padding='0.1,0.1', takefocus=False, width=6,command=lambda:horizontal_animation(Pages.bottom_pages["Search"],-1200,0,0,10))
+    import app
+    LogInBtn = ttk.Button(HomeBar, text="LogIn", padding='0.1,0.1', takefocus=False, width=6,command=lambda:login(app.root))
     LogInBtn.place(x=1060, y=80)
 
     Cart = ttk.Button(HomeBar, text="Cart", padding='0.1,0.1', takefocus=False, width=6,)
