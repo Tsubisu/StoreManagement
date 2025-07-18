@@ -9,16 +9,21 @@ def database_init():
 
     c.execute("""CREATE TABLE IF NOT EXISTS user (
                   full_name VARCHAR(40),
+                  username VARCHAR(40),
                   contact CHAR(10),
-                  email VARCHAR(30),
                   address VARCHAR(30),
+                  email VARCHAR(30),
+                  password VARCHAR(30),
+                 
                   user_id INTEGER PRIMARY KEY AUTOINCREMENT)
+       
                    """)
     c.execute("""CREATE TABLE IF NOT EXISTS managers(
                 full_name VARCHAR(40),
                 contact CHAR(10),
-                email VARCHAR(30),
                 address VARCHAR(30),
+                email VARCHAR(30),
+                password VARCHAR(30),
                 manager_id INTEGER PRIMARY KEY AUTOINCREMENT)
                  """)
 
@@ -36,6 +41,40 @@ def database_init():
                 comment_id INTEGER PRIMARY KEY AUTOINCREMENT)
                 """)
 
+    c.execute(""" CREATE TABLE IF NOT EXISTS cart (
+                cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER,
+                FOREIGN KEY(user_id) REFERENCES user(user_id)
+                 )""")
+
+    c.execute("""CREATE TABLE IF NOT EXISTS cart_items (
+                cart_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                cart_id INTEGER,
+                product_id TEXT,
+                quantity INTEGER CHECK(quantity > 0),
+                FOREIGN KEY(cart_id) REFERENCES cart(cart_id),
+                FOREIGN KEY(product_id) REFERENCES products(product_id) )
+                """)
+
+
+    c.execute("""CREATE TABLE IF NOT EXISTS orders (
+                    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER,
+                    order_date TEXT,
+                    total_amount INTEGER,
+                    FOREIGN KEY(user_id) REFERENCES user(user_id))
+                """)
+
+
+    c.execute("""CREATE TABLE IF NOT EXISTS order_items (
+            order_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            order_id INTEGER,
+            product_id TEXT,
+            quantity INTEGER,
+            price_at_purchase INTEGER,
+            FOREIGN KEY(order_id) REFERENCES orders(order_id),
+            FOREIGN KEY(product_id) REFERENCES products(product_id))
+                """)
 
     conn.commit()
     conn.close()
