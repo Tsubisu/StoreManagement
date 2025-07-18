@@ -6,7 +6,8 @@ from Animation import *
 
 def home_bar_builder(frame):
     import Pages, PageSwitcher as ps
-
+    from LoginWindow import login 
+    import app 
 
     HomeBar=ttk.Frame(frame, height=120, width=1200, padding=10, style="My.TFrame")
 
@@ -22,7 +23,7 @@ def home_bar_builder(frame):
     Search = ttk.Button(HomeBar, text="Search", padding='0.1,0.1', takefocus=False, width=6,command=lambda:vertical_animation(Pages.top_pages["Search"],0,-120,0,2))
     Search.place(x=1010, y=80)
 
-    LogInBtn = ttk.Button(HomeBar, text="LogIn", padding='0.1,0.1', takefocus=False, width=6,command=lambda:horizontal_animation(Pages.bottom_pages["Search"],-1200,0,0,10))
+    LogInBtn = ttk.Button(HomeBar, text="LogIn", padding='0.1,0.1', takefocus=False, width=6,command=lambda:login(app.root))
     LogInBtn.place(x=1060, y=80)
 
     Cart = ttk.Button(HomeBar, text="Cart", padding='0.1,0.1', takefocus=False, width=6,)
@@ -39,7 +40,6 @@ def home_page(frame):
     home_style=ttk.Style()
     home_style.configure("Home.TFrame", background="Green")
     home_frame = ttk.Frame(frame,width=1200,height=(675-120),style="Home.TFrame")
-
 
     return home_frame
 
