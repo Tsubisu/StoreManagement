@@ -1,0 +1,10 @@
+# Ignore IDE config
+.idea/
+
+# Ignore Python cache
+__pycache__/
+
+# Ignore specific files
+Test.py
+rename.py
+TemporaryDataInserter.py

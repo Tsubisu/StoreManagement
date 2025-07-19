@@ -21,8 +21,8 @@ def search_bar(frame):
 
     search_button_style = ttk.Style()
     search_button_style.configure("Search_button.TButton",borderwidth=0,background="white")
-    search_img=Image.open("images/search.png")
 
+    search_img=Image.open("images/search.png")
     search_img=search_img.resize((36,27),Image.Resampling.LANCZOS)
     icon = ImageTk.PhotoImage(search_img)
     search_button=ttk.Button(search_box_frame,style="Search_button.TButton",image=icon,width=4,takefocus=0,padding=(0,0))
@@ -31,7 +31,7 @@ def search_bar(frame):
 
     exit_style=ttk.Style()
     exit_style.configure("Search.TButton", background="white",borderwidth=0,font=("Arial Unicode MS", 18))
-    exit_style.map("Search.TButton",background=[("active", "white"), ("pressed", "blue")],foreground=[("active", "black"), ("pressed", "white")] ,relief=[("active", "raised"), ("pressed", "sunken")])
+    exit_style.map("Search.TButton",background=[("active", "white")],foreground=[("pressed", "grey"),("active", "grey")])
     exit_btn=ttk.Button(search_bar_frame,text="X",takefocus=False,style="Search.TButton",width=2,command=lambda:exit(search_box,search_bar_frame))
     exit_btn.place(x=850,y=60)
 
