@@ -26,7 +26,8 @@ def home_bar_builder(frame):
     LogInBtn = ttk.Button(HomeBar, text="LogIn", padding='0.1,0.1', takefocus=False, width=6,command=lambda:login(app.root))
     LogInBtn.place(x=1060, y=80)
 
-    Cart = ttk.Button(HomeBar, text="Cart", padding='0.1,0.1', takefocus=False, width=6,)
+  
+    Cart = ttk.Button(HomeBar, text="Cart", padding='0.1,0.1', takefocus=False, width=6,command=lambda:horizontal_animation(Pages.bottom_pages["Search"],-1200,0,0,10))
     Cart.place(x=1110, y=80)
 
     return HomeBar
