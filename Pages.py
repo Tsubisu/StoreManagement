@@ -1,6 +1,7 @@
 import HomePage
 import SearchPage
 import ContactPage
+import CartPage
 
 top_pages={}
 bottom_pages={}
@@ -12,7 +13,7 @@ def top_page_init(frame):
 
 def bottom_page_init(frame):
     global bottom_pages
-    bottom_pages={"Default":HomePage.home_page(frame),"Contact":ContactPage.contact_page(frame),"Search":SearchPage.search_page(frame)}
+    bottom_pages={"Default":HomePage.home_page(frame),"Contact":ContactPage.contact_page(frame),"Search":SearchPage.search_page(frame),"Cart":CartPage.cart_page(frame)}
     return bottom_pages
 
 
