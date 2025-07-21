@@ -28,7 +28,8 @@ def database_init():
                  """)
 
     c.execute("""CREATE TABLE IF NOT EXISTS products(
-                    product_id varchar(100),
+                    product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    product_name VARCHAR(40),
                     product_description TEXT,
                     product_price INTEGER check(product_price>=0),
                     quantity INTEGER check(quantity>=0))""")
@@ -81,8 +82,9 @@ def database_init():
 
 
 root=None
+BtmFrame=None
 def app_initializer():
-    global root 
+    global root, BtmFrame
     root = Tk()
     root.geometry('1200x675')
     root.title('Music Store')
@@ -114,8 +116,7 @@ def app_initializer():
 
     WindowStyle = ttk.Style()
     WindowStyle.theme_use("clam")
-    WindowStyle.configure("My.TFrame", background="#25beb3")
-    WindowStyle.configure("My.TButton", background="white",padding=(0,10,15,5))
+
 
     Topfrm = ttk.Frame(ParentFrame, height=120, width=1200)
     Topfrm.place(x=0,y=0)
