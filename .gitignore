@@ -8,3 +8,4 @@ __pycache__/
 Test.py
 rename.py
 TemporaryDataInserter.py
+store.db
