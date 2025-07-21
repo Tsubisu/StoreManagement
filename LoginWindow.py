@@ -20,8 +20,9 @@ def login(tk):
 
     pages["Login"] = show_login(parent, page_switcher)
     pages["Sign up"] = show_signup(parent, page_switcher)
+    pages["Manager"] = show_manager(parent,page_switcher)
     for page in pages.values():
-        page.place(x=0,y=0)
+        page.place(x=0,y=0,)
     page_switcher("Login")
 
     mainloop()
@@ -34,11 +35,11 @@ def show_login(frame, page_switcher):
     
     Label(login_frame, text='Login', font=('Arial', 16),background="#ECECFA").place(x=200,y=30,anchor="center")
     
-    Label(login_frame, text='E-mail:').place(x=20, y=75)
+    Label(login_frame, text='E-mail:',background="#ECECFA").place(x=20, y=75,)
     email_entry = Entry(login_frame)
     email_entry.place(x=90, y=75)
     
-    Label(login_frame, text='Password:').place(x=20, y=115)
+    Label(login_frame, text='Password:',background="#ECECFA").place(x=20, y=115)
     password_entry = Entry(login_frame, show="*")
     password_entry.place(x=90, y=115)
     
@@ -65,6 +66,7 @@ def show_login(frame, page_switcher):
          cur.execute("SELECT * FROM managers WHERE email=? AND password=?", (email, password))
          if cur.fetchone():
             messagebox.showinfo("Login", "Login successful as a manager")
+            page_switcher("Manager")
          else:
             messagebox.showerror("Login", "Invalid  manager's email or password.")
          conn.commit()
@@ -73,44 +75,58 @@ def show_login(frame, page_switcher):
          
         
     Button(login_frame,text='Manager',command=manager_login).place(x=20,y=155)
-    Button(login_frame, text='Login',command=user_login , width=7).place(x=90, y=155)
+    Button(login_frame, text='Login',command=user_login , width=7).place(x=93, y=155)
     Button(login_frame, text='Signup', command=lambda: page_switcher("Sign up"), width=7).place(x=165,y=155)
     return login_frame
 
+def show_manager(frame, page_switcher):
+    manager_frame_style=ttk.Style()
+    manager_frame_style.configure("manager.TFrame",background="#ECECFA")
+    manager_frame = ttk.Frame(frame, width=600, height=600,style="manager.TFrame")
+    
+    Label(manager_frame, text='Login', font=('Arial', 16),background="#ECECFA").place(x=200,y=30,anchor="center")
+    
+    
+    Button(manager_frame, text='Signup', command=lambda: page_switcher("Sign up"), width=7).place(x=165,y=155)
+    
+    return manager_frame
+
 
 def show_signup(frame, page_switcher):
-    signup_frame = ttk.Frame(frame, width=600, height=600)
+    signup_frame_style=ttk.Style()
+    signup_frame_style.configure("signup.TFrame",background="#ECECFA")
+    signup_frame = ttk.Frame(frame, width=600, height=600,style="signup.TFrame" )
     
-    login_label=Label(signup_frame,text="Sign Up",font=('Arial',20))
+    login_label=Label(signup_frame,text="Sign Up",font=('Arial',20),background="#ECECFA")
     login_label.place(x=200,y=20,anchor="center")
     
     Button(signup_frame, text='Back' , width=7,command=lambda: page_switcher("Login")).place(x=30, y=10)
     
-    full_name=Label(signup_frame,text='Full Name :',font=('Arial, 11'))
+    full_name=Label(signup_frame,text='Full Name :',font=('Arial, 11'),background="#ECECFA")
     full_name.place(x=20,y=55)
     
     full_name_entry=ttk.Entry(signup_frame,width=30)
     full_name_entry.place(x=110,y=55)
     
-    contact_label=Label(signup_frame,text="Contact     :",font=('Arial, 11'))
+    contact_label=Label(signup_frame,text="Contact     :",font=('Arial, 11'),background="#ECECFA")
     contact_label.place(x=20,y=90)
     
     contact_entry=ttk.Entry(signup_frame,width=30)
     contact_entry.place(x=110,y=90)
     
-    address_label=Label(signup_frame,text="Address    :",font=('Arial, 11'))
+    address_label=Label(signup_frame,text="Address    :",font=('Arial, 11'),background="#ECECFA")
     address_label.place(x=20,y=125)
     
     address_entry=ttk.Entry(signup_frame,width=30)
     address_entry.place(x=110,y=125)
     
-    email_label=Label(signup_frame,text="E-mail       :",font=('Arial, 11'))
+    email_label=Label(signup_frame,text="E-mail       :",font=('Arial, 11'),background="#ECECFA")
     email_label.place(x=20,y=155)
     
     email_entry=ttk.Entry(signup_frame,width=30)
     email_entry.place(x=110,y=155)
     
-    password_label=Label(signup_frame,text="Password :",font=('Arial, 11'))
+    password_label=Label(signup_frame,text="Password :",font=('Arial, 11'),background="#ECECFA")
     password_label.place(x=20,y=185)
     
     password_entry=ttk.Entry(signup_frame,width=30)
@@ -140,7 +156,6 @@ def show_signup(frame, page_switcher):
             messagebox.showerror("Error", "Email or username already exists")
     
     Button(signup_frame, text='Submit',command=submit_signup).place(x=160, y=255)
-    
     
     return signup_frame
 
