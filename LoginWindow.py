@@ -6,7 +6,7 @@ import User
 pages={}
 def login(tk):
     global pages
-    top = Toplevel(tk)
+    top = Toplevel(app.root)
     top.geometry('400x400')
     top.title('Login  page')
     parent = ttk.Frame(top, width=600, height=600)
@@ -30,7 +30,7 @@ def show_login(frame, page_switcher,Top):
 
     login_frame = ttk.Frame(frame, width=600, height=600,style="login.TFrame")
     Label(login_frame, text='Login', font=('Segoe UI Light', 18,'bold'),background="#ECECFA").place(x=200,y=30,anchor="center")
-    
+
     Label(login_frame, text='E-mail       :',font=('Segoe UI Light', 15),background="#ECECFA").place(x=20, y=75)
     email_entry = ttk.Entry(login_frame)
     email_entry.place(x=120, y=85)
