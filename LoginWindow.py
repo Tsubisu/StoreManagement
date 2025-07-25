@@ -4,9 +4,10 @@ import sqlite3
 from tkinter import messagebox
 import User
 pages={}
+import ManagerWindow
 def login(tk):
     global pages
-    top = Toplevel(app.root)
+    top = Toplevel(tk)
     top.geometry('400x400')
     top.title('Login  page')
     parent = ttk.Frame(top, width=600, height=600)
@@ -65,6 +66,7 @@ def show_login(frame, page_switcher,Top):
          cur.execute("SELECT * FROM managers WHERE email=? AND password=?", (email, password))
          if cur.fetchone():
             messagebox.showinfo("Login", "Login successful as a manager")
+            ManagerWindow.show_manager()
             Top.destroy()
          else:
             messagebox.showerror("Login", "Invalid  manager's email or password.")
