@@ -2,11 +2,14 @@ from tkinter import *
 from tkinter import ttk as ttk
 import sqlite3
 from tkinter import messagebox
+import app
+import ManagerWindow
 
 pages={}
-def login(tk):
+def login():
+    
     global pages
-    top = Toplevel(tk)
+    top = Toplevel(app.root)
     top.geometry('400x400')
     top.title('Login  page')
     parent = ttk.Frame(top, width=600, height=600)
@@ -17,7 +20,6 @@ def login(tk):
 
     pages["Login"] = show_login(parent, page_switcher)
     pages["Sign up"] = show_signup(parent, page_switcher)
-    pages["Manager"] = show_manager(parent,page_switcher)
     for page in pages.values():
         page.place(x=0,y=0,)
     page_switcher("Login")
@@ -50,6 +52,7 @@ def show_login(frame, page_switcher):
         cur.execute("SELECT * FROM user WHERE email=? AND password=?", (email, password))
         if cur.fetchone():
             messagebox.showinfo("Login", "Login successful!")
+            
         else:
             messagebox.showerror("Login", "Invalid fullname or password.")
         conn.commit()
@@ -63,7 +66,7 @@ def show_login(frame, page_switcher):
          cur.execute("SELECT * FROM managers WHERE email=? AND password=?", (email, password))
          if cur.fetchone():
             messagebox.showinfo("Login", "Login successful as a manager")
-            page_switcher("Manager")
+            ManagerWindow.show_manager()
          else:
             messagebox.showerror("Login", "Invalid  manager's email or password.")
          conn.commit()
@@ -76,17 +79,6 @@ def show_login(frame, page_switcher):
     Button(login_frame, text='Signup', command=lambda: page_switcher("Sign up"), width=7).place(x=165,y=155)
     return login_frame
 
-def show_manager(frame, page_switcher):
-    manager_frame_style=ttk.Style()
-    manager_frame_style.configure("manager.TFrame",background="#ECECFA")
-    manager_frame = ttk.Frame(frame, width=600, height=600,style="manager.TFrame")
-    
-    Label(manager_frame, text='Login', font=('Arial', 16),background="#ECECFA").place(x=200,y=30,anchor="center")
-    
-    
-    Button(manager_frame, text='Signup', command=lambda: page_switcher("Sign up"), width=7).place(x=165,y=155)
-    
-    return manager_frame
 
 
 def show_signup(frame, page_switcher):
@@ -148,7 +140,11 @@ def show_signup(frame, page_switcher):
             conn.commit()
             conn.close()
             messagebox.showinfo("Success", "Registration successful!")
-            page_switcher("Login")
+            full_name_entry.delete(0, END)
+            contact_entry.delete(0, END)
+            address_entry.delete(0, END)
+            email_entry.delete(0, END)
+            password_entry.delete(0, END)
         except sqlite3.IntegrityError:
             messagebox.showerror("Error", "Email or username already exists")
     

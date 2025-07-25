@@ -9,7 +9,6 @@ def database_init():
 
     c.execute("""CREATE TABLE IF NOT EXISTS user (
                   full_name VARCHAR(40),
-                  username VARCHAR(40),
                   contact CHAR(10),
                   address VARCHAR(30),
                   email VARCHAR(30),
