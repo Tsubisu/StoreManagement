@@ -143,6 +143,6 @@ def home_page(frame):
     # p4_button.place(x=145, y=325, anchor="center")
 
     # p4_label = Label(f4, text="Rs{} NPR".format(rows[2][3]), background="#ECECFA", font=("Segoe UI Light", 14))
-    # p4_label.place(x=145, y=351, anchor="center")
+    #p4_label.place(x=145, y=351, anchor="center")
     return home_frame
 
