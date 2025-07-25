@@ -2,7 +2,7 @@ import sqlite3
 from tkinter import ttk as ttk, messagebox
 from tkinter import *
 from PIL import ImageTk, Image
-from matplotlib.patches import BoxStyle
+
 
 Order_frame=None
 def order_page(frame):
