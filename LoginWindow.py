@@ -67,6 +67,7 @@ def show_login(frame, page_switcher,Top):
          if cur.fetchone():
             messagebox.showinfo("Login", "Login successful as a manager")
             ManagerWindow.show_manager()
+            User.update_manager_login(email)
             Top.destroy()
          else:
             messagebox.showerror("Login", "Invalid  manager's email or password.")
