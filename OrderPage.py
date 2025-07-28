@@ -2,7 +2,6 @@ import sqlite3
 from tkinter import ttk as ttk, messagebox
 from tkinter import *
 from PIL import ImageTk, Image
-from matplotlib.patches import BoxStyle
 
 Order_frame=None
 def order_page(frame):
@@ -16,7 +15,6 @@ def order_page(frame):
     scrollbar = ttk.Scrollbar(order_page_frame, orient='vertical', command=canvas.yview)
     scrollbar.place(relx=1, rely=0, relheight=1, anchor='ne')
     canvas.configure(yscrollcommand=scrollbar.set)
-    canvas.bind('<MouseWheel>', lambda event: canvas.yview_scroll(-int(event.delta / 120), "units"))
 
     scroll_frame = ttk.Frame(canvas, width=1200, height=(675 - 120), padding=(0, 0, 0, 0), style="order.TFrame")
     canvas_window = canvas.create_window((0, 0), window=scroll_frame, anchor="nw")

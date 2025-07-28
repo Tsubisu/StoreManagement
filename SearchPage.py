@@ -24,7 +24,7 @@ def search_bar(frame):
     search_box_frame=ttk.Frame(search_bar_frame, style="Search_box_frame.TFrame",width=475,height=39)
     search_box_frame.place(x=600,y=80,anchor="center")
 
-    search_box=Entry(search_box_frame,width=41,bd=0,font=("Verdana",12))
+    search_box=Entry(search_box_frame,width=41,bd=0,font=("Verdana",12),bg="red")
     search_box.place(x=5,y=10)
 
 
