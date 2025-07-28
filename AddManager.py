@@ -67,6 +67,5 @@ def add_manager(frame):
             messagebox.showerror("Error", "Email or username already exists")
     
     Button(add_page_frame, text='Submit',command=submit_manager).place(x=160, y=255)
-    
-    
+   
     return add_page_frame

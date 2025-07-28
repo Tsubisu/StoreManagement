@@ -6,6 +6,7 @@ import ManageHomepage
 import CheckComments
 import ViewOrders
 import AddManager
+import UpdateManagerProfile
 
 top_pages={}
 bottom_pages={}
@@ -24,5 +25,5 @@ def bottom_page_init(frame):
 
 def manager_page_init(frame):
     global manager_pages
-    manager_pages={"Default":ManageHomepage.manage_homepage(frame),"Check_Comments":CheckComments.check_comments(frame),"View_Orders":ViewOrders.view_orders(frame),"Add_Manager":AddManager.add_manager(frame)}
+    manager_pages={"Default":ManageHomepage.manage_homepage(frame),"Check_Comments":CheckComments.check_comments(frame),"View_Orders":ViewOrders.view_orders(frame),"Add_Manager":AddManager.add_manager(frame),"Update_Profile":UpdateManagerProfile.update_profile(frame)}
     return manager_pages

@@ -49,6 +49,8 @@ def show_manager():
     add_manager_btn=ttk.Button(Topframe,text="Add Manager",style="button.TButton",takefocus=False, command=lambda: PageSwitcher.manager_page_switcher("Add_Manager"))
     add_manager_btn.place(x=470,y=120,anchor="sw")
     
+    update_manager_btn=ttk.Button(Topframe,text="Update Manager Profile",style="button.TButton",takefocus=False, command=lambda: PageSwitcher.manager_page_switcher("Update_Profile"))
+    update_manager_btn.place(x=610,y=120,anchor="sw")
     
     return manager_frame
 
