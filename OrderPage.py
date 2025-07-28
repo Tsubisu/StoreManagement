@@ -96,7 +96,7 @@ def Show_order():
 
 
                 order_display.grid(padx=(40,50),pady=(30,0))
-                print(order)
+
 
 
 
