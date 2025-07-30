@@ -5,6 +5,10 @@ from tkinter import ttk
 from tkinter import messagebox
 user=None
 user_id=None
+
+
+manager_id=None
+
 def update_logged_status(email):
     global user,user_id
     from LoginWindow import login
@@ -205,5 +209,13 @@ def check_log_status():
 
     return False
 
-
-
+def update_manager_login(email):
+    global manager_id
+    if email!=None:
+        conn=sqlite3.connect('store.db')
+        c=conn.cursor()
+        c.execute('''SELECT * FROM managers WHERE email=?''',(email,))
+        data=c.fetchone()
+        manager_id=data[5]
+        conn.close()
+        

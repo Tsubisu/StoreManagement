@@ -63,87 +63,98 @@ def home_page(frame):
     fp_style=ttk.Style()
     fp_style.configure("FeaturedFrame.TFrame", background="#ECECFA")
 
+    filename = "numbers.txt"
+
+    with open(filename, "r") as f:
+        numbers = [int(line.strip()) for line in f.readlines()]
 
     conn=sqlite3.connect("store.db")
     c=conn.cursor()
-    c.execute('''SELECT * FROM products WHERE product_id IN (1,2,3,4)''')
+    c.execute('''
+    SELECT * FROM products WHERE product_id IN ({},{},{},{})
+    ORDER BY CASE product_id  
+    WHEN {} THEN 0
+    WHEN {} THEN 1
+    WHEN {} THEN 2
+    WHEN {} THEN 3
+    END '''.format(numbers[0],numbers[1],numbers[2],numbers[3],numbers[0],numbers[1],numbers[2],numbers[3]))
     rows=c.fetchall()
     conn.close()
 
 
-    button_style=ttk.Style()
-    button_style.configure("Name.TButton", background="#ECECFA",font=("Segoe UI Light",16),borderwidth=0,relief='solid')
-    button_style.map("Name.TButton", background=[("active","#ECECFA"),("pressed","#ECECFA")])
-    #
-    #
-    # f1=ttk.Frame(home_frame,width=290,height=380,style="FeaturedFrame.TFrame")
-    # f1.place(x=15, y=150)
-    #
-    # f1_image=Image.open("images/1.png")
-    # f1_image=f1_image.resize((290,300),Image.Resampling.LANCZOS)
-    # f1_image=ImageTk.PhotoImage(f1_image)
-    # f1_label=Label(f1,image=f1_image)
-    # f1_label.place(x=0,y=0)
-    # f1_label.image=f1_image
-    #
-    # p1_button=ttk.Button(f1,text=rows[0][1],width=52,style="Name.TButton",takefocus=False,command=lambda:display_product_info(1,"Default"))
-    # p1_button.place(x=145,y=325,anchor="center")
-    #
-    # p1_label=Label(f1,text="Rs{:,} NPR".format(rows[0][3]),background="#ECECFA",font=("Segoe UI Light",14))
-    # p1_label.place(x=145,y=351,anchor="center")
-    #
-    #
-    # f2=ttk.Frame(home_frame,width=290,height=380,style="FeaturedFrame.TFrame")
-    # f2.place(x=308, y=150)
-    #
-    # f2_image = Image.open("images/2.png")
-    # f2_image = f2_image.resize((290, 300), Image.Resampling.LANCZOS)
-    # f2_image = ImageTk.PhotoImage(f2_image)
-    # f2_label = Label(f2, image=f2_image)
-    # f2_label.place(x=0, y=0)
-    # f2_label.image = f2_image
-    #
-    # p2_button = ttk.Button(f2, text=rows[1][1], width=52, style="Name.TButton", takefocus=False,
-    #                        command=lambda: display_product_info(2, "Default"))
-    # p2_button.place(x=145, y=325, anchor="center")
-    #
-    # p2_label = Label(f2, text="Rs{:,} NPR".format(rows[1][3]), background="#ECECFA", font=("Segoe UI Light", 14))
-    # p2_label.place(x=145, y=351, anchor="center")
-    #
-    #
-    # f3 = ttk.Frame(home_frame, width=290, height=380, style="FeaturedFrame.TFrame")
-    # f3.place(x=601, y=150)
-    #
-    # f3_image = Image.open("images/3.png")
-    # f3_image = f3_image.resize((290, 300), Image.Resampling.LANCZOS)
-    # f3_image = ImageTk.PhotoImage(f3_image)
-    # f3_label = Label(f3, image=f3_image)
-    # f3_label.place(x=0, y=0)
-    # f3_label.image = f3_image
-    #
-    # p3_button = ttk.Button(f3, text=rows[2][1], width=52, style="Name.TButton", takefocus=False,
-    #                        command=lambda: display_product_info(3,"Default"))
-    # p3_button.place(x=145, y=325, anchor="center")
-    #
-    # p3_label = Label(f3, text="Rs{:,} NPR".format(rows[2][3]), background="#ECECFA", font=("Segoe UI Light", 14))
-    # p3_label.place(x=145, y=351, anchor="center")
-    #
-    #
-    # f4 = ttk.Frame(home_frame, width=290, height=380, style="FeaturedFrame.TFrame")
-    # f4.place(x=894, y=150)
-    #
-    # f4_image = Image.open("images/4.png")
-    # f4_image = f4_image.resize((290, 300), Image.Resampling.LANCZOS)
-    # f4_image = ImageTk.PhotoImage(f4_image)
-    # f4_label = Label(f4, image=f4_image)
-    # f4_label.place(x=0, y=0)
-    # f4_label.image = f4_image
-    #
-    # p4_button = ttk.Button(f4, text=rows[3][1], width=52, style="Name.TButton", takefocus=False,
-    #                        command=lambda: display_product_info(4, "Default"))
-    # p4_button.place(x=145, y=325, anchor="center")
-    #
-    # p4_label = Label(f4, text="Rs{:,} NPR".format(rows[2][3]), background="#ECECFA", font=("Segoe UI Light", 14))
-    # p4_label.place(x=145, y=351, anchor="center")
+    if len(rows)==4:
+        button_style=ttk.Style()
+        button_style.configure("Name.TButton", background="#ECECFA",font=("Segoe UI Light",16),borderwidth=0,relief='solid')
+        button_style.map("Name.TButton", background=[("active","#ECECFA"),("pressed","#ECECFA")])
+
+        f1=ttk.Frame(home_frame,width=290,height=380,style="FeaturedFrame.TFrame")
+        f1.place(x=15, y=150)
+
+        f1_image=Image.open("images/{}.png".format(rows[0][0]))
+        f1_image=f1_image.resize((290,300),Image.Resampling.LANCZOS)
+        f1_image=ImageTk.PhotoImage(f1_image)
+        f1_label=Label(f1,image=f1_image)
+        f1_label.place(x=0,y=0)
+        f1_label.image=f1_image
+
+        p1_button=ttk.Button(f1,text=rows[0][1],width=52,style="Name.TButton",takefocus=False,command=lambda:display_product_info(rows[0][0],"Default"))
+        p1_button.place(x=145,y=325,anchor="center")
+
+        p1_label=Label(f1,text="Rs{:,} NPR".format(rows[0][3]),background="#ECECFA",font=("Segoe UI Light",14))
+        p1_label.place(x=145,y=351,anchor="center")
+
+
+        f2=ttk.Frame(home_frame,width=290,height=380,style="FeaturedFrame.TFrame")
+        f2.place(x=308, y=150)
+
+        f2_image = Image.open("images/{}.png".format(rows[1][0]))
+        f2_image = f2_image.resize((290, 300), Image.Resampling.LANCZOS)
+        f2_image = ImageTk.PhotoImage(f2_image)
+        f2_label = Label(f2, image=f2_image)
+        f2_label.place(x=0, y=0)
+        f2_label.image = f2_image
+
+        p2_button = ttk.Button(f2, text=rows[1][1], width=52, style="Name.TButton", takefocus=False,
+                               command=lambda: display_product_info(rows[1][0], "Default"))
+        p2_button.place(x=145, y=325, anchor="center")
+
+        p2_label = Label(f2, text="Rs{:,} NPR".format(rows[1][3]), background="#ECECFA", font=("Segoe UI Light", 14))
+        p2_label.place(x=145, y=351, anchor="center")
+
+
+        f3 = ttk.Frame(home_frame, width=290, height=380, style="FeaturedFrame.TFrame")
+        f3.place(x=601, y=150)
+
+        f3_image = Image.open("images/{}.png".format(rows[2][0]))
+        f3_image = f3_image.resize((290, 300), Image.Resampling.LANCZOS)
+        f3_image = ImageTk.PhotoImage(f3_image)
+        f3_label = Label(f3, image=f3_image)
+        f3_label.place(x=0, y=0)
+        f3_label.image = f3_image
+
+        p3_button = ttk.Button(f3, text=rows[2][1], width=52, style="Name.TButton", takefocus=False,
+                               command=lambda: display_product_info(rows[2][0],"Default"))
+        p3_button.place(x=145, y=325, anchor="center")
+
+        p3_label = Label(f3, text="Rs{:,} NPR".format(rows[2][3]), background="#ECECFA", font=("Segoe UI Light", 14))
+        p3_label.place(x=145, y=351, anchor="center")
+
+
+        f4 = ttk.Frame(home_frame, width=290, height=380, style="FeaturedFrame.TFrame")
+        f4.place(x=894, y=150)
+
+        f4_image = Image.open("images/{}.png".format(rows[3][0]))
+        f4_image = f4_image.resize((290, 300), Image.Resampling.LANCZOS)
+        f4_image = ImageTk.PhotoImage(f4_image)
+        f4_label = Label(f4, image=f4_image)
+        f4_label.place(x=0, y=0)
+        f4_label.image = f4_image
+
+        p4_button = ttk.Button(f4, text=rows[3][1], width=52, style="Name.TButton", takefocus=False,
+                               command=lambda: display_product_info(rows[3][0], "Default"))
+        p4_button.place(x=145, y=325, anchor="center")
+
+        p4_label = Label(f4, text="Rs{:,} NPR".format(rows[2][3]), background="#ECECFA", font=("Segoe UI Light", 14))
+        p4_label.place(x=145, y=351, anchor="center")
     return home_frame
 

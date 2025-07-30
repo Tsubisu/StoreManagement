@@ -33,7 +33,7 @@ def add_manager(frame):
     email_entry=ttk.Entry(add_page_frame,width=30)
     email_entry.place(x=150,y=155)
     
-    password_label=Label(add_page_frame,text="Create Password:",font=('Arial',11),background="#ECECFA")
+    password_label=Label(add_page_frame,text="Create Password: ",font=('Arial',11),background="#ECECFA")
     password_label.place(x=20,y=185)
     
     password_entry=ttk.Entry(add_page_frame,width=30)
@@ -66,7 +66,6 @@ def add_manager(frame):
         except sqlite3.IntegrityError:
             messagebox.showerror("Error", "Email or username already exists")
     
-    Button(add_page_frame, text='Submit',command=submit_manager).place(x=160, y=255)
-    
-    
+    Button(add_page_frame, text='Submit',command=submit_manager).place(x=160, y=235)
+   
     return add_page_frame
