@@ -53,6 +53,7 @@ def view_orders(frame):
         style=ttk.Style()
         style.configure("TFrame", background="#ECECFA")
         orders_frame = ttk.Frame(scroll_frame, width=1200, height=40,style="TFrame")
+
         ttk.Label(orders_frame, text=data[0], font=("Arial", 12), background="#ECECFA").place(x=0,y=10,anchor="nw")
         ttk.Label(orders_frame, text=data[1], font=("Arial", 12), background="#ECECFA").place(x=240,y=10,anchor="nw")
         ttk.Label(orders_frame, text=data[2], font=("Arial", 12), background="#ECECFA").place(x=480,y=10,anchor="nw")

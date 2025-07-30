@@ -2,7 +2,7 @@ import sqlite3
 from tkinter import ttk as ttk, messagebox
 from tkinter import *
 from PIL import ImageTk, Image
-from matplotlib.patches import BoxStyle
+
 
 Order_frame=None
 def order_page(frame):
@@ -67,6 +67,9 @@ def Show_order():
                 pcur=pc.cursor()
                 pcur.execute("SELECT * FROM products WHERE product_id=?",(order[2],))
                 product=pcur.fetchone()
+
+
+
                 pc.close()
 
 
@@ -92,7 +95,7 @@ def Show_order():
                 bstyle = ttk.Style()
                 bstyle.configure("cancel.TButton", background="black",foreground="white",borderwidth=0,relief="solid")
                 bstyle.map("cancel.TButton", foreground=[("pressed","black")],background=[("pressed","white")])
-                ttk.Button(order_display,text="Cancel order",takefocus=False,style="cancel.TButton",command=lambda:cancel_order(order[0],order[2],order[3])).place(x=950,y=50,anchor="center")
+                ttk.Button(order_display,text="Cancel order",takefocus=False,style="cancel.TButton",command=lambda or_id=order[0]:cancel_order(or_id,order[2],order[3])).place(x=950,y=50,anchor="center")
 
 
                 order_display.grid(padx=(40,50),pady=(30,0))

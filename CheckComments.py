@@ -17,7 +17,7 @@ def check_comments(frame):
     # canvas.bind('<MouseWheel>', lambda event: canvas.yview_scroll(-int(event.delta / 120), "units"))
 
     scroll_frame = ttk.Frame(canvas, width=1200, height=(675 - 120), padding=(0, 0, 0, 0), style="order.TFrame")
-    canvas_window = canvas.create_window((0, 30), window=scroll_frame, anchor="nw")
+    canvas_window = canvas.create_window((0, 45), window=scroll_frame, anchor="nw")
    
 
     def on_configure(event):
@@ -61,7 +61,7 @@ def check_comments(frame):
     
         estyle = ttk.Style()
         estyle.configure("E.TEntry", font=("Arial", 12),fieldbackground="#ECECFA", foreground="black", borderwidth=0,relief='flat')
-        entry=ttk.Entry(scroll_frame,width=30,font=("Arial", 12),style="E.TEntry")
+        entry=ttk.Entry(comment_frame,width=30,font=("Arial", 12),style="E.TEntry")
         entry.insert(0,data[3])
         entry.config(state='readonly')
         entry.place(x=900,y=10,anchor="nw")

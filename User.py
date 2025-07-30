@@ -35,7 +35,6 @@ def update_logged_status(email):
         user=None
         user_id=None
         Show_order()
-        print("updated the order page")
         for child in Pages.top_pages["Home_bar"].winfo_children():
             if (isinstance(child, ttk.Button)) and child['text'] == "profile":
                 child.configure(text="LogIn")
