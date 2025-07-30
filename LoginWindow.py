@@ -127,7 +127,7 @@ def show_signup(frame, page_switcher,Top):
     password_label=ttk.Label(signup_frame,style="Signup.TLabel",text="Password :",font=('Arial', 11))
     password_label.place(x=20,y=185)
     
-    password_entry=ttk.Entry(signup_frame,width=30)
+    password_entry=ttk.Entry(signup_frame,width=30,show="*")
     password_entry.place(x=110,y=185)
     
     def submit_signup():
