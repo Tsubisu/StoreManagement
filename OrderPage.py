@@ -47,11 +47,12 @@ def Show_order():
         c.execute("SELECT * FROM orders where user_id=?",(User.user_id,))
         orders=c.fetchall()
         if orders is not None:
-            def cancel_order(order_id):
+            def cancel_order(order_id,product_id,quantity):
                 if messagebox.askyesno("Cancel Order","Do you really want to cancel this order?"):
                     conn = sqlite3.connect("store.db")
                     cur=conn.cursor()
                     cur.execute("DELETE FROM orders WHERE order_id=?",(order_id,))
+                    cur.execute("UPDATE products SET quantity=quantity+? WHERE product_id=?",(quantity,product_id))
                     conn.commit()
                     conn.close()
 
@@ -91,7 +92,7 @@ def Show_order():
                 bstyle = ttk.Style()
                 bstyle.configure("cancel.TButton", background="black",foreground="white",borderwidth=0,relief="solid")
                 bstyle.map("cancel.TButton", foreground=[("pressed","black")],background=[("pressed","white")])
-                ttk.Button(order_display,text="Cancel order",takefocus=False,style="cancel.TButton",command=lambda:cancel_order(order[0])).place(x=950,y=50,anchor="center")
+                ttk.Button(order_display,text="Cancel order",takefocus=False,style="cancel.TButton",command=lambda:cancel_order(order[0],order[2],order[3])).place(x=950,y=50,anchor="center")
 
 
                 order_display.grid(padx=(40,50),pady=(30,0))

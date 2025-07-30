@@ -24,7 +24,7 @@ def search_bar(frame):
     search_box_frame=ttk.Frame(search_bar_frame, style="Search_box_frame.TFrame",width=475,height=39)
     search_box_frame.place(x=600,y=80,anchor="center")
 
-    search_box=Entry(search_box_frame,width=41,bd=0,font=("Verdana",12),bg="red")
+    search_box=Entry(search_box_frame,width=41,bd=0,font=("Verdana",12),bg="white")
     search_box.place(x=5,y=10)
 
 
@@ -112,13 +112,19 @@ def update_scroll_frame(string):
             style.configure("Product.TFrame",background="#ECECFA")
             p_frame=ttk.Frame(Product_frame,width=275,height=250,style="Product.TFrame")
 
-            product_image=Image.open("images/{}.png".format(data[0]))
-            product_image=product_image.resize((275,180),Image.Resampling.LANCZOS)
-            product_image=ImageTk.PhotoImage(product_image)
+            try:
+                product_image=Image.open("images/{}.png".format(data[0]))
+                product_image=product_image.resize((275,180),Image.Resampling.LANCZOS)
+                product_image=ImageTk.PhotoImage(product_image)
 
-            image_label=Label(p_frame,image=product_image)
-            image_label.image = product_image
-            image_label.place(x=10,y=6)
+                image_label=Label(p_frame,image=product_image)
+                image_label.image = product_image
+                image_label.place(x=10,y=6)
+
+            except FileNotFoundError:
+                Label(p_frame,text="Image not found").place(x=138,y=90,anchor="center")
+
+
 
 
             style = ttk.Style()

@@ -32,6 +32,13 @@ def database_init():
                     product_price INTEGER check(product_price>=0),
                     quantity INTEGER check(quantity>=0))""")
 
+    c.execute("""CREATE TABLE IF NOT EXISTS manager_product(
+                     product_id INTEGER ,
+                     manager_id INTEGER,
+                     FOREIGN KEY(product_id) REFERENCES products(product_id),
+                     FOREIGN KEY(manager_id) REFERENCES managers(manager_id))
+                     """)
+
     c.execute("""CREATE TABLE IF NOT EXISTS comments(
                 name VARCHAR(40),
                 email VARCHAR(30),

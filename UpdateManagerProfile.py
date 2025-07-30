@@ -33,7 +33,7 @@ def update_profile(frame):
         email_entry=ttk.Entry(update_page_frame,width=30)
         email_entry.place(x=150,y=155)
         
-        password_label=Label(update_page_frame,text="New Password:",font=('Arial',11),background="#ECECFA")
+        password_label=Label(update_page_frame,text="New Password: ",font=('Arial',11),background="#ECECFA")
         password_label.place(x=20,y=185)
         
         password_entry=ttk.Entry(update_page_frame,width=30)
@@ -61,7 +61,7 @@ def update_profile(frame):
                     messagebox.showerror("Error", f"Update failed: {e}")
        
 
-        Button(update_page_frame, text="Save Changes", command=save_changes).place(x=150, y=410)
+        Button(update_page_frame, text="Save Changes", command=save_changes).place(x=150, y=220)
         
         return update_page_frame
 
