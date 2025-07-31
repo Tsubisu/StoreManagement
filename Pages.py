@@ -3,7 +3,6 @@ import Product
 import SearchPage
 import ContactPage
 import OrderPage
-import ManageHomepage
 import CheckComments
 import ViewOrders
 import AddManager
